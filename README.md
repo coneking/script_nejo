@@ -1,2 +1,2 @@
 # script_nejo
-Varios scripts bash para distintas revisiones.
+Varios scripts bash para distintas revisiones
