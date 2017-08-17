@@ -1,2 +1,2 @@
 # script_nejo
-Varios scripts batch 
+Varios scripts batch para distintas revisiones.
