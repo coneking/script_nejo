@@ -110,21 +110,23 @@ echo
 echo
 }
 
-ping -c1 -w1 172.18.171.43 >/dev/null 2>&1
+ip_server="DIRECCION_IP"
+ip_rutas="172.18.171.43 172.20.117.249"
+ping -c1 -w1 $ip_server >/dev/null 2>&1
 if [ $? -ne 0 ]; then
     netstat -rn |grep -q "10.91.180"
     if [ $? -eq 0 ]; then
-        sudo route add -host 172.18.171.43 172.20.117.249 >/dev/null 2>&1
+        sudo route add -host $ip_rutas >/dev/null 2>&1
     fi
 fi
-ping -c1 -w1 172.18.171.43 >/dev/null 2>&1
+ping -c1 -w1 $ip_server >/dev/null 2>&1
 if [ $? -eq 0 ]; then
     which sudo >/dev/null 2>&1
     if [ $? -eq 0 ]; then
         tmp_dir=$(date +%s)
         mkdir /tmp/$tmp_dir
         sudo nfso -o nfs_use_reserved_ports=1 >/dev/null 2>&1
-        sudo mount 172.18.171.43:/mft_logs/aix/ /tmp/$tmp_dir
+        sudo mount ip_server:/mft_logs/aix/ /tmp/$tmp_dir
         sudo chown rundeck /tmp/$tmp_dir
         info_aix > /tmp/$tmp_dir/$(hostname -s).txt
         echo "Archivo con información!!!"
@@ -134,7 +136,7 @@ if [ $? -eq 0 ]; then
         tmp_dir=$(date +%s)
         mkdir /tmp/$tmp_dir
         /usr/local/bin/sudo nfso -o nfs_use_reserved_ports=1 >/dev/null 2>&1
-        /usr/local/bin/sudo mount 172.18.171.43:/mft_logs/aix/ /tmp/$tmp_dir
+        /usr/local/bin/sudo mount $ip_server:/mft_logs/aix/ /tmp/$tmp_dir
         /usr/local/bin/sudo chown rundeck /tmp/$tmp_dir
         info_aix > /tmp/$tmp_dir/$(hostname -s).txt
         echo "Archivo con información!!!"
