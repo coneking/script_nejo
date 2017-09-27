@@ -2,6 +2,7 @@
 rojo="\e[1;31m"
 verde="\e[1;32m"
 fin="\e[0m"
+dir_servidor="INGRESAR_LA_DIRECCION_DEL_SERVIDOR_WEB"
 
 echo "############################"
 echo "### Descarga de Archivos ###"
@@ -11,14 +12,14 @@ echo
 #Función para disponibilizar los archivos al servidor web
 #Esta función es invocada más abajo
 transfiere(){
-sudo curl -s -T "@option.Directorio@/$archivo" http://172.18.171.43/seir/ |grep Created > /dev/null 2>&1
+sudo curl -s -T "@option.Directorio@/$archivo" $dir_servidor |grep Created > /dev/null 2>&1
         if [ $? -eq 0 ]; then
-            echo -e "Archivo "$archivo" disponible en: ${verde}http://172.18.171.43/seir/$archivo"
+            echo -e "Archivo "$archivo" disponible en: ${verde}$dir_servidor/$archivo"
             echo "---"
             echo
         else
             echo "No se puede subir archivo $archivo o ya se encuentra disponible."
-            echo -e "Favor revisar: ${verde}http://172.18.171.43/seir/"
+            echo -e "Favor revisar: ${verde}$dir_servidor"
             echo "---"
             echo
         fi
@@ -26,14 +27,14 @@ sudo curl -s -T "@option.Directorio@/$archivo" http://172.18.171.43/seir/ |grep 
 
 
 transfiere_comp(){
-sudo curl -s -T "/SEIR/$archivo".gz"" http://172.18.171.43/seir/ |grep Created > /dev/null 2>&1
+sudo curl -s -T "@option.Directorio@/$archivo".gz"" $dir_servidor |grep Created > /dev/null 2>&1
         if [ $? -eq 0 ]; then
-            echo -e "Archivo "$archivo" disponible en: ${verde}http://172.18.171.43/seir/$archivo'.gz'"
+            echo -e "Archivo "$archivo" disponible en: ${verde}$dir_servidor/$archivo'.gz'"
             echo "---"
             echo
         else
             echo "No se puede subir archivo $archivo o ya se encuentra disponible."
-            echo -e "Favor revisar: ${verde}http://172.18.171.43/seir/"
+            echo -e "Favor revisar: ${verde}$dir_servidor"
             echo "---"
             echo
         fi
@@ -67,10 +68,10 @@ if [ -d @option.Directorio@ ]; then
                 transfiere
             else
                 echo "(Se respalda y comprime el archivo $archivo antes de subirlo)"
-                sudo cp -p @option.Directorio@/$archivo /SEIR
-                sudo gzip /SEIR/$archivo
+                sudo cp -p @option.Directorio@/$archivo /tmp
+                sudo gzip /tmp/$archivo
                 transfiere_comp
-                sudo rm -f /SEIR/$archivo".gz"
+                sudo rm -f /tmp/$archivo".gz"
             fi
         else
             echo -e "Favor esperar mientras se sube el archivo ${verde}$archivo${fin}"
