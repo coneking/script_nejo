@@ -142,6 +142,7 @@ Rama_Master__
              \__Rama_user_2-->archivo
              \__Rama_user_3-->archivo
 
+
 Creación de rama:
 	git branch nombre_de_la_rama
 
@@ -149,67 +150,110 @@ Creación de rama:
 Crear rama y cambiarse automáticamente a ella_
 	git branch -b nombre_de_la_rama
 
+
 Ver las ramas: 
-git branch
+	git branch
+
+
+Ver las ramas locales y las remotas:
+	git branch -all
+
 
 Cambiarse a otra rama:
-git checkout "nombre_de_la_rama"
+	git checkout "nombre_de_la_rama"
+
 
 Crear una rama y cambiarse automáticamente a ella
-git checkout -b "nombre_de_la_rama"
+	git checkout -b "nombre_de_la_rama"
+
 
 Borrar una rama:
-git branch -d "nombre_de_la_rama"
+	git branch -d "nombre_de_la_rama"
+
 
 Fucionar Ramas (nos vamos a la rama a la cual se le quiere añadir el cambio):
-git merge "nombre_de_la_rama"
+	git merge "nombre_de_la_rama"
 
-TAGS:
+
+
+
+
+TAGS
+====
+
 Los TAGS se crean para identificar mejor un commit, sin tener que buscar su código desde el log.
 Conveniente para dejar un pequeño comentario y saber que se hizo, o la fecha.
 
+
+Para ver los tags creados:
+	git tag
+
+
 Para crear tags en el commit actual usamos:
-git tag "nombre_del_tag"
+	git tag "nombre_del_tag"
+
 
 Para crear un tag de un commit ya realizado:
-1.- Buscar el código del commit git log --oneline
-2.- Agregar un tag al commit: git tag nombre_del_tag código_commit
+1.- Buscar el código del commit:
+	git log --oneline
 
-Para ver los tags se ejecuta:
-git tag
+2.- Agregar un tag al commit: 
+	git tag nombre_del_tag código_commit
+
 
 Para ir a un commit desde un tag (mismo que ver un commit en particular):
-git checkout nombre_del_tag
+	git checkout nombre_del_tag
 
-Push:
+
+
+
+
+Push
+====
+
 Para enviar los cambios realizados en un proyecto, se utiliza push a sus repositorios remotos.
 Si el proyecto tiene cambio de varias personas, se recomienda tener un repositorio central.
 
 Para agregar repositorios remotos se ejecuta:
-git remote add origin dirección_remota (puede ser una url de github)
+	git remote add origin dirección_remota (puede ser una url de github)
+
 (Clonar un repositorio es lo mismo)
 
+
 Para enviar los cambios al repositorio remoto:
-git push origin nombre_de_la_rama_local
+	git push origin nombre_de_la_rama_local
 
 
-Pull:
+
+
+
+Pull
+====
+
 Los repositorios remotos tienen sus propias ramas, al igual que las locales pero se llaman "origin/nombre_de_la_rama"
 Por ejemplo, localmente podemos tener la rama "master" y al revisar con el comando "git branch --all" veremos que
 mostrará además de las ramas locales, las remotas.
-Ejemplo:
-$ git branch --all
-  Desarrollo
-  cone_git_console
-* master
-  remotes/origin/Desarrollo
-  remotes/origin/HEAD -> origin/master
-  remotes/origin/cone_git_console
-  remotes/origin/master
 
-Sincronizar cambios de un repositorio remoto (origin).
+Ejemplo:
+
+	$git branch --all
+  	Desarrollo
+  	cone_git_console
+	* master
+  	remotes/origin/Desarrollo
+  	remotes/origin/HEAD -> origin/master
+  	remotes/origin/cone_git_console
+  	remotes/origin/master
+
+(La rama marcada con un "*" indica que es la rama en la que se está trabajando)
+
+
+Sincronizar cambios de un repositorio remoto (origin)
+=====================================================
+
 Si queremos descargar commits que se hayan hecho en repositorios remotos al nuestro (local):
 
-git pull origin nombre_de_la_rama
-(se recomienda hacer pull antes de hacer cambios, esto para trabajar con la última versión)
+	git pull origin nombre_de_la_rama
+
+(se recomienda hacer pull antes de hacer cambios, esto para trabajar con la última versión del repositorio)
 
