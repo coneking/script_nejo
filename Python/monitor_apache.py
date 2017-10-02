@@ -34,18 +34,17 @@ elif apache == "running" and proceso >= critic:
     print("2 Procesos_http Valor="+str(proceso)+";"+str(warn)+";"+str(crit)+";2 Procesos_http Critical",proceso)
     # Si el archivo existe revisa que número tiene y compara, si es igual a 2 recarga apache, sino le sumará uno
     if (os.path.isfile(file1)):
-        file = open(file, "r")
-        salida = file.read()
-        suma = int(salida)
+        file = open(file, "r").read()
+        suma = int(file)
         if suma == 2:
             print("Me reinicio")
             os.popen('/etc/init.d/httpd reload')
-            escribir(param)
+            escribir(str(param))
         else:
             suma +=1
-            escribir(str(param))
+            escribir(str(suma))
     else:
         # Si el archivo no existe se crea con valor "0"
-        escribe(str(param))
+        escribir(str(param))
 else:
     print("3 Procesos_http Valor="+str(proceso)+";"+str(warn)+";"+str(crit)+";3 Procesos_http Unknown",proceso)
