@@ -9,8 +9,8 @@
 import os
 import os.path
 
-warn = 4
-crit = 6
+warn = 200
+crit = 230
 file1 = "RUTA_DEL_LOG"
 cuenta_http = os.popen('pgrep -fl http |grep -v grep|wc -l')
 proceso = int(cuenta_http.read())
@@ -25,17 +25,27 @@ def escribir(num):
         f.write(num)
         f.close()
 
-# Función para leer sobr el archivo log
-def leer(num):
-    with open(file1, "r") as f:
-        f.read()
-        f.close()
-
-# Comparaciones para umbrales
+# Comparaciones para umbrales mientras el servicio apache esté activo
 if apache == "running" and proceso < warn:
     print("0 Procesos_http Valor="+str(proceso)+";"+str(warn)+";"+str(crit)+";0 Procesos_http OK",proceso)
 elif apache == "running" and proceso >= warn and proceso < crit:
-    print("0 Procesos_http Valor="+str(proceso)+";"+str(warn)+";"+str(crit)+";1 Procesos_http Warning",proceso)
+    print("1 Procesos_http Valor="+str(proceso)+";"+str(warn)+";"+str(crit)+";1 Procesos_http Warning",proceso)
 elif apache == "running" and proceso >= critic:
-    print("0 Procesos_http Valor="+str(proceso)+";"+str(warn)+";"+str(crit)+";2 Procesos_http Critical",proceso)
-
+    print("2 Procesos_http Valor="+str(proceso)+";"+str(warn)+";"+str(crit)+";2 Procesos_http Critical",proceso)
+    # Si el archivo existe revisa que número tiene y compara, si es igual a 2 recarga apache, sino le sumará uno
+    if (os.path.isfile(file1)):
+        file = open(file, "r")
+        salida = file.read()
+        suma = int(salida)
+        if suma == 2:
+            print("Me reinicio")
+            os.popen('/etc/init.d/httpd reload')
+            escribir(param)
+        else:
+            suma +=1
+            escribir(str(param))
+    else:
+        # Si el archivo no existe se crea con valor "0"
+        escribe(str(param))
+else:
+    print("3 Procesos_http Valor="+str(proceso)+";"+str(warn)+";"+str(crit)+";3 Procesos_http Unknown",proceso)
