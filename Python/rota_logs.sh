@@ -1,6 +1,6 @@
 #!/bin/sh
 
-##Definir la ruta del log
+### Definir la ruta del log
 log_file="RUTA/DEL/LOG"
 size_log=`du -sk $log_file |awk '{print $1}'`
 how_many=`ls $log_file*.gz |wc -l`
