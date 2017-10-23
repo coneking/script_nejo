@@ -148,7 +148,7 @@ Creación de rama:
 
 
 Crear rama y cambiarse automáticamente a ella_
-	git checkout -b nombre_de_la_rama
+	git checkoutttt -b nombre_de_la_rama
 
 
 Ver las ramas: 
