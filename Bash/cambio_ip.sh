@@ -46,3 +46,6 @@ for i in ${listado[@]}; do
 done
 echo
 
+
+# Se debe agregar una varibale para el cambio de gateway
+# Se debe agregar validación del archivo /etc/hosts
