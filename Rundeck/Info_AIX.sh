@@ -111,10 +111,11 @@ echo
 }
 
 ip_server="DIRECCION_IP"
-ip_rutas="172.18.171.43 172.20.117.249"
+ip_rutas="RUTAS_QUE_SE_NECESITEN"
 ping -c1 -w1 $ip_server >/dev/null 2>&1
+## Verificar si exiten rutas para el servidor NFS
 if [ $? -ne 0 ]; then
-    netstat -rn |grep -q "10.91.180"
+    netstat -rn |egrep -q "$ip_rutas"
     if [ $? -eq 0 ]; then
         sudo route add -host $ip_rutas >/dev/null 2>&1
     fi
@@ -126,7 +127,7 @@ if [ $? -eq 0 ]; then
         tmp_dir=$(date +%s)
         mkdir /tmp/$tmp_dir
         sudo nfso -o nfs_use_reserved_ports=1 >/dev/null 2>&1
-        sudo mount ip_server:/mft_logs/aix/ /tmp/$tmp_dir
+        sudo mount $ip_server:/mft_logs/aix/ /tmp/$tmp_dir
         sudo chown rundeck /tmp/$tmp_dir
         info_aix > /tmp/$tmp_dir/$(hostname -s).txt
         echo "Archivo con información!!!"
