@@ -8,6 +8,9 @@
 # Se pueden remplazar directamente en el script por las IPs
 listado=(`for i in $(cat RUTA_CON_IPS_ORIGINALES.txt); do echo $i; done`)
 listado2=(`for i in $(cat RUTA_CON_IPS_NUEVAS.txt); do echo $i; done`)
+gateway1="IP_GATEWAY_ORI"
+gateway2="IP_GATEWAY_NEW"
+
 ruta="/etc/sysconfig/network-scripts"
 
 # El script se ejecutará de acuerdo a la cantidad de direcciones IPs del listado de IPs originales.
@@ -25,7 +28,7 @@ for i in ${listado[@]}; do
                 # Con la ayuda del contador se mantiene el orden de las dos listas de IPs
 		echo "Se modifica por la IP: ${listado2[$contador]}"
                 # Respalda archivo de interfaces original
-		cp -p $ruta/ifcfg-eth0 $ruta/ifcfg-eth0_$(date +%F) ; gzip $ruta/ifcfg-eth0_$(date +%F)
+		cp -p $ruta/ifcfg-$tarjeta $ruta/ifcfg-$tarjeta$(date +%F) ; gzip $ruta/$tarjeta$(date +%F)
                 echo
                 echo "Información de tarjeta $tarjeta actual:"
                 echo "=================================="
@@ -33,8 +36,9 @@ for i in ${listado[@]}; do
                 ifconfig $tarjeta
                 echo
 		# Busca la actual dirección IP en el archivo de interfaces  y lo modifica por la nueva dirección
-                sed -i '/^IPADDR='"$i"'/ s//IPADDR='"${listado2[$contador]}"'/' $ruta/ifcfg-eth0
-                ifdown $tarjeta; ifup $tarjeta
+                sed -i '/'"$i"'/ s//'"${listado2[$contador]}"'/' $ruta/ifcfg-$tarjeta
+                sed -i '/'"$gateway1"'/ s//'"$gateway2"'/' $ruta/ifcfg-$tarjeta
+		ifdown $tarjeta; ifup $tarjeta
                 echo "Información actualizada de tarjeta $tarjeta:"
                 echo "======================================="
                 echo
