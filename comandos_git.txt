@@ -30,6 +30,9 @@ Añadir archivo a staging index:
 
 (Si se quiere agregar todos los archivos del directorio, se ejecuta: git add .)
 
+Eliminar un "add"
+	git reset -- "Nombre_del_archivo"
+
 Ver el estado de los archivos que están añadidos, eliminados o pendientes de commit.
 	git status
 
