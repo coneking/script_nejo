@@ -30,6 +30,9 @@ Añadir archivo a staging index:
 
 (Si se quiere agregar todos los archivos del directorio, se ejecuta: git add .)
 
+Eliminar un "add"
+	git reset -- "Nombre_del_archivo"
+
 Ver el estado de los archivos que están añadidos, eliminados o pendientes de commit.
 	git status
 
@@ -143,12 +146,31 @@ Rama_Master__
              \__Rama_user_3-->archivo
 
 
+Los repositorios remotos tienen sus propias ramas, al igual que las locales pero se llaman "origin/nombre_de_la_rama"
+Por ejemplo, localmente podemos tener la rama "master" y al revisar con el comando "git branch --all" veremos que
+mostrará además de las ramas locales, las remotas.
+
+Ejemplo:
+
+	$git branch --all
+  	Desarrollo
+  	cone_git_console
+	* master
+  	remotes/origin/Desarrollo
+  	remotes/origin/HEAD -> origin/master
+  	remotes/origin/cone_git_console
+  	remotes/origin/master
+
+(La rama marcada con un "*" indica que es la rama en la que se está trabajando)
+
+
+
 Creación de rama:
 	git branch nombre_de_la_rama
 
 
 Crear rama y cambiarse automáticamente a ella_
-	git branch -b nombre_de_la_rama
+	git checkout -b nombre_de_la_rama
 
 
 Ver las ramas: 
@@ -223,35 +245,18 @@ Para agregar repositorios remotos se ejecuta:
 Para enviar los cambios al repositorio remoto:
 	git push origin nombre_de_la_rama_local
 
-
+(Se recomienda realizar un "git pull" antes de un "git push" esto en caso de que alguien haya modificado el repositorio
+ya que, de otra manera al hacer un "git push" dará un error)
 
 
 
 Pull
 ====
 
-Los repositorios remotos tienen sus propias ramas, al igual que las locales pero se llaman "origin/nombre_de_la_rama"
-Por ejemplo, localmente podemos tener la rama "master" y al revisar con el comando "git branch --all" veremos que
-mostrará además de las ramas locales, las remotas.
-
-Ejemplo:
-
-	$git branch --all
-  	Desarrollo
-  	cone_git_console
-	* master
-  	remotes/origin/Desarrollo
-  	remotes/origin/HEAD -> origin/master
-  	remotes/origin/cone_git_console
-  	remotes/origin/master
-
-(La rama marcada con un "*" indica que es la rama en la que se está trabajando)
-
-
 Sincronizar cambios de un repositorio remoto (origin)
 =====================================================
 
-Si queremos descargar commits que se hayan hecho en repositorios remotos al nuestro (local):
+Si queremos descargar commits que se hayan hecho en repositorios remotos al nuestro (local) usamos:
 
 	git pull origin nombre_de_la_rama
 
