@@ -262,3 +262,17 @@ Si queremos descargar commits que se hayan hecho en repositorios remotos al nues
 
 (se recomienda hacer pull antes de hacer cambios, esto para trabajar con la última versión del repositorio)
 
+
+
+Crear un repositorio en como servidor
+=====================================
+
+Crear un directorio como repositorio en una ruta específica:
+	mkdir /opt/GIT/repository.git
+	cd /opt/GIT/repository.git
+
+Iniciar el directorio como repositorio:
+	git --bare init
+	git config core.sharedRepository true
+
+(Con esto se puede utilizar un servidor Linux como repositorio central)
