@@ -46,6 +46,11 @@ Agregar título al commit:
 
 Borrar archivos que estén en el staging index:
 	git rm "Nombre_del_archivo"
+	(Borrará el archivo del área de preparación y del directorio)
+
+	git rm --cached "Nombre_del_archivo"
+	(Borrará sólo el archivo del área de preparación)
+
 (Posteriormente se hace un commit para informar que se borró el archivo)
 
 
@@ -205,7 +210,7 @@ TAGS
 
 Los TAGS se crean para identificar mejor un commit, sin tener que buscar su código desde el log.
 Conveniente para dejar un pequeño comentario y saber que se hizo, o la fecha.
-
+Los TAGS son locales y no se comparten al hacer un push.
 
 Para ver los tags creados:
 	git tag
@@ -222,6 +227,9 @@ Para crear un tag de un commit ya realizado:
 2.- Agregar un tag al commit: 
 	git tag nombre_del_tag código_commit
 
+
+Para filtrar TAGS se utiliza el siguiente comando:
+	git tag -l 'Expresión_regular'
 
 Para ir a un commit desde un tag (mismo que ver un commit en particular):
 	git checkout nombre_del_tag
