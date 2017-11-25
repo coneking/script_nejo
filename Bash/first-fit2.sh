@@ -1,4 +1,5 @@
-echo -e "Numero de bloques de memoria: \c"
+clear
+echo -e "Número de bloques de memoria: \c"
 read numero
 arreglo=()
 for ((i=1;i<=$numero;i++)); do
@@ -14,7 +15,7 @@ echo "Arreglo $numero0: ${arreglo[$numero0]}"
 
 
 echo
-echo -e "Numero de procesos: \c"
+echo -e "Número de procesos: \c"
 read numero2
 arreglo2=()
 for ((i=1;i<=$numero2;i++)); do
@@ -26,26 +27,24 @@ done
 
 contador=1
 while [ $contador -lt ${#arreglo[@]} ]; do
-        if [ ${arreglo2[$contador]} -le ${arreglo[$contador]} ]; then
+        if [ ${arreglo2[$contador]} -le ${arreglo[$contador]} ] 2>/dev/null; then
                 resta=$(expr ${arreglo[$contador]} - ${arreglo2[$contador]})
                 echo "Memoria desperdiciada del bloque de memoria $contador: $resta Kb"
-        else
-                echo "Proceso es mayor que la memoria, esperada"
+        	let contador++
+	else
+                echo "Proceso $contador es mayor que la memoria, esperada"
                 let contador++
-#               while [ $contador -lt ${#arreglo[@]} ]; do
                         espera=$(expr $contador - 1)
-                        #siguiente=$(expr $contador + 1)
-                        #if [ ${arreglo2[2]} -le ${arreglo[3]} ]; then
-                        if [ ${arreglo2[$espera]} -le ${arreglo[$contador]} ]; then
+                        if [ ${arreglo2[$espera]} -le ${arreglo[$contador]} ] 2>/dev/null; then
                                 echo "Corriendo proceso encolado"
                                 resta=$(expr ${arreglo[$contador]} - ${arreglo2[$espera]})
                                 echo "Memoria desperdiciada del bloque de memoria $espera: $resta Kb"
-                                let contador++
-                        else
-                                let contador++
-                        fi
-#               done
+                        	#let contador++
+			else
+                        	echo Sigo esperando por un Bloque de memoria más grande
+				echo
+				#let contador++
+		   	fi
         fi
-        let contador++
 done
 
