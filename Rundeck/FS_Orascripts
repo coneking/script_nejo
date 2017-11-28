@@ -7,35 +7,76 @@ VERDE="\033[1;32m"
 
 ora_s="/usr/local/orascripts"
 servidor=`hostname -s`
+f_stab="/etc/fstab"
 
 
+
+declare -A ora_pais
+ora_pais=(["Pais1"]=server1 ["Pais2"]=server2 ["Pais3"]=server3 ["Pais4"]=server4 ["Pais5"]=server5 ["Pais6"]=server6)
+
+monta_ora(){
+    sudo mount ${ora_pais[@option.Pais@]}:$ora_s $ora_s >/dev/null 2>&1
+    if [ $? -eq 0 ]; then
+        echo -e "Montado de FS Orascripts: ${verde}OK${normal}"
+        sudo su - root -c "cp /etc/fstab /etc/fstab_$(date '+%F_%H_%M_%S')"
+        sudo su - root -c "echo '${ora_pais[@option.Pais@]}:$ora_s $ora_s  nfs defaults    0 0' >> /etc/fstab"
+        echo
+        df -Ph $ora_s
+    else
+        echo "Error al montar FS Orascripts... Verificar con CCO"
+    fi
+}
+
+echo "##############################"
+echo "####      Orascripts      ####"
+echo "##############################"
+echo
 echo "Ticket CAU:   @option.CAU@"
 echo "Fecha:        `date +'%T %F'`"
 echo "Servidor:     $servidor"
 echo
+echo
 
-df -Ph |grep -q $ora_s
-if [ $? -eq 0 ]; then
-    echo -e "Filesystem Orascripts disponible: ${verde}SI${normal}"
-    echo
-    df -Ph $ora_s
-else
-    echo -e "Filesystem Orascripts disponible: ${rojo}NO${normal}"
-    echo
-    # Verificando si existe en la tabla de FS
-    grep -v "#" /etc/fstab |grep -q $ora_s
+if [ @option.accion@ == "Test" ]; then
+    df -Ph |grep -q $ora_s
     if [ $? -eq 0 ]; then
-        sudo mount $ora_s >/dev/null 2>&1
-        if [ $? -eq 0 ]; then
-            echo "Orascripts existe en la tabla de FS"
-            echo -e "Montado de FS Orascripts: ${verde}OK${normal}"
-            echo
-            df -Ph $ora_s
-        else
-            echo "Error al montar FS Orascripts... Verificar con CCO"
-        fi
-    else
-        echo "Orascripts no existe en la tabla de FS... Verificar con CCO"
+        echo -e "Filesystem Orascripts disponible: ${verde}SI${normal}"
         echo
+        df -Ph $ora_s
+    else
+        echo -e "Filesystem Orascripts disponible: ${rojo}NO${normal}"
+        echo
+    fi
+else
+    df -Ph |grep -q $ora_s
+    if [ $? -eq 0 ]; then
+        echo -e "Filesystem Orascripts disponible: ${verde}SI${normal}"
+        echo
+        df -Ph $ora_s
+    else
+        echo -e "Filesystem Orascripts disponible: ${rojo}NO${normal}"
+        echo
+        # Verificando si existe en la tabla de FS
+        grep -v "#" /etc/fstab |grep -q $ora_s
+        if [ $? -eq 0 ]; then
+            sudo mount $ora_s >/dev/null 2>&1
+            if [ $? -eq 0 ]; then
+                echo "Orascripts existe en la tabla de FS"
+                echo -e "Montado de FS Orascripts: ${verde}OK${normal}"
+                echo
+                df -Ph $ora_s
+            else
+                echo "Error al montar FS Orascripts... Verificar con CCO"
+            fi
+        else
+            echo "Orascripts no existe en la tabla de FS... Se agrega servidor correspondiente al país"
+            echo
+            if [ -d $ora_s ]; then
+                sudo mkdir $ora_s >/dev/null 2>&1
+                monta_ora
+            else
+                monta_ora
+            fi
+        fi
     fi
 fi
