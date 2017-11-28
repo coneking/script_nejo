@@ -1,0 +1,41 @@
+rojo="\e[1;31m"
+verde="\e[1;32m"
+normal="\e[0m"
+ROJO="\033[1;31m"
+NORM="\033[0m"
+VERDE="\033[1;32m"
+
+ora_s="/usr/local/orascripts"
+servidor=`hostname -s`
+
+
+echo "Ticket CAU:   @option.CAU@"
+echo "Fecha:        `date +'%T %F'`"
+echo "Servidor:     $servidor"
+echo
+
+df -Ph |grep -q $ora_s
+if [ $? -eq 0 ]; then
+    echo -e "Filesystem Orascripts disponible: ${verde}SI${normal}"
+    echo
+    df -Ph $ora_s
+else
+    echo -e "Filesystem Orascripts disponible: ${rojo}NO${normal}"
+    echo
+    # Verificando si existe en la tabla de FS
+    grep -v "#" /etc/fstab |grep -q $ora_s
+    if [ $? -eq 0 ]; then
+        sudo mount $ora_s >/dev/null 2>&1
+        if [ $? -eq 0 ]; then
+            echo "Orascripts existe en la tabla de FS"
+            echo -e "Montado de FS Orascripts: ${verde}OK${normal}"
+            echo
+            df -Ph $ora_s
+        else
+            echo "Error al montar FS Orascripts... Verificar con CCO"
+        fi
+    else
+        echo "Orascripts no existe en la tabla de FS... Verificar con CCO"
+        echo
+    fi
+fi
