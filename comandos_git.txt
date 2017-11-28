@@ -221,20 +221,29 @@ Para crear tags en el commit actual usamos:
 
 
 Para crear un tag de un commit ya realizado:
-1.- Buscar el código del commit:
-	git log --oneline
+	1.- Buscar el código del commit:
+		git log --oneline
 
-2.- Agregar un tag al commit: 
-	git tag nombre_del_tag código_commit
+	2.- Agregar un tag al commit: 
+		git tag nombre_del_tag código_commit
 
 
 Para filtrar TAGS se utiliza el siguiente comando:
 	git tag -l 'Expresión_regular'
 
+
 Para ir a un commit desde un tag (mismo que ver un commit en particular):
 	git checkout nombre_del_tag
 
 
+Para enviar tags a un servidor compartido.
+	git push origin nombre_del_tag
+
+
+Para enviar todos los tags creados.
+	git push origin --tags
+
+(Por defecto Git no envia los tags con cada push)
 
 
 
