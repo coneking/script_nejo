@@ -38,11 +38,14 @@ Ver el estado de los archivos que están añadidos, eliminados o pendientes de c
 
 Enviar commit por archivo:
 	git commit nombre_del_archivo
-(Al ejecutarse se abrirá un archivo en el cual se podrá escribir el título del commit y
-una descripción)
+	(Al ejecutarse se abrirá un archivo en el cual se podrá escribir el título del commit y una descripción)
 
 Agregar título al commit:
 	git commit -m "Título del commit" nombre_del_archivo
+
+Eliminar el último commit realizado:
+	git reset --soft HEAD~1
+	(Borra el último commit sin eliminar el archivo o los cambios realizados, sólo el commit)
 
 Borrar archivos que estén en el staging index:
 	git rm "Nombre_del_archivo"
