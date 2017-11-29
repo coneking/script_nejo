@@ -199,6 +199,9 @@ Crear una rama y cambiarse automáticamente a ella
 
 Borrar una rama:
 	git branch -d "nombre_de_la_rama"
+	(GIT tiene la inteligencia de revisar si en una rama hay cambios que no se hayan fusionado con la rama master.
+	por lo tanto si encuentra que la rama a eliminar tiene commits que no tiene la rama master lo advertirá.
+	Si estamos seguros de querer perder esos cambios la eliminación de la ramá se ejecuta con la opción "-D")
 
 
 Fucionar Ramas (nos vamos a la rama a la cual se le quiere añadir el cambio):
