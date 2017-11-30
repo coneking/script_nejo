@@ -1,0 +1,90 @@
+Git.
+
+Control de versiones.
+Qué es?
+Muchas personas utilizan el versionamiento sin saberlo. 
+Cómo?
+Copiando archivos antes de modificarlos (backup).
+
+Bueno el control de versiones es lo mismo, sólo que se realiza de una manera más automática.
+
+Para evita esta tarea rutinaria se crearon los VCSs (Version Control System).
+Qué hace?
+Utiliza una BD local para registrar los cambios en los archivos.
+Desventaja: Sólo una persona puede hacer cambios en los archivos a la vez (cambios locales)
+
+Para integrar la colaboración de más de una persona a la modificación de archivos (desarrolladores)
+Se creó una versión mejorada de los VCSs, los CVCS (Centralized Version Control System).
+Qué hace?
+Utiliza un servidor central que tiene el proyecto y los usuarios descargan los archivos que necesitan para trabajarlo y
+posteriomente subirlos con los cambios efectuados.
+
+Ventajas: 
+	Mejor administración, que hace quien y donde.
+	Los usuarios tienen conocimiento de los cambios que se han generado en el proyecto.
+	
+Desventaja:
+	Único punto de falla. Si falla el servidor central, falla todo.
+	
+Para atacar este problema se crearon los DVCSs (Distributed Version Control System) como GIT.
+
+Ventajas: Cada persona que trabaja en el proyecto tiene una copia instantanea localmente.
+				Permiten administrar varios flujos de trabajo.
+
+Git se creó el 2005 por la comunidad desarrolladora de Linux.
+
+Peculariedades de GIT.
+
+Permite respaldar completamente un proyecto.
+Permite trabajar localmente en un proyecto para posteriormente enviarlo al servidor GIT.
+Mediante el checksum, GIT verifica si un archivo tuvo un cambio o no.
+	Por ejemplo, en un proyecto con 5 archivos, si sólo uno fue modificado, GIT no guardará nuevamente los otros cuatro.
+	Simplemente revisará que no se hicieron cambios y hará una referencia al archivo original, algo como un link simbólico.
+	
+Estados de GIT:
+
+GIT trabaja con tres estados:
+1.- Modificado (modify)
+2.- Preparado (staged o added)
+3.- Confirmado (committed)
+
+Ejemplo:
+	Modifico un arhivo (primer paso)
+		echo "hola" > mi_archivo.txt
+		
+	Añado el archivo al área de reparación (staged o added)
+		git add mi_archivo.txt
+		
+	Confirmo el cambio realizado, guardandolo como una instantánea en nuestro directorio local GIT.
+		git commit -m "Mi primer commit" mi_archivo.txt
+
+
+
+Crear un directorio GIT:
+        mkdir Mi_directorio_git
+        cd Mi_directorio_git
+		git init
+(al crear el directorio GIT, se creará un directorio oculto .git)
+
+Clonar un repositorio existen (URL):
+        git clone https://github.com/usuario/repositorio
+		git remote clone
+(Para crear archivos se hace con el editor de texto correspondiente)
+
+git rm --cached readme.txt
+
+Configurar tu identidad:
+Para poder hacer commits de un proyecto primero debes identificarte.
+Esto con el proposito de mantener una mejor administración para el dueño del proyecto.
+
+	git config --global user.name "John Doe"
+	git config --global user.email johndoe@example.com
+
+Verificar la información:
+	git config --list
+	
+	
+Nota: Si dos o más personas envían información a un servidor, sólo el que envío primero se aceptará.
+Los que llegaron después no podrán enviar información porque su directorio no estará actualizado.
+Para tal caso tendrán que hacer un "git pull" del servidor para posterior enviar sus cambios.
+
