@@ -246,7 +246,7 @@ public class Main {
                 System.out.println("La energía de " + g2.getNombre() + " es " + g2.getEnergia());
                 System.out.println("La energía de " + g3.getNombre() + " es " + g3.getEnergia());
                 System.out.println("\n");
-            } while (g1.getEstado().equals("En guardia") && g2.getEstado().equals("En guardia"));
+            } while (g2.getEstado().equals("En guardia") && g3.getEstado().equals("En guardia"));
         }
 
         System.out.println("Fin del combate");
