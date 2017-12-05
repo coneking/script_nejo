@@ -4,9 +4,12 @@ import java.util.Random;
 public class Gladiador {
     private String nombre;
     private String estado = "En guardia";
-    private int energia = 1000;
+    private int energia = 100;
     private int fuerza;
-
+    private String historia;
+    private String derrota;
+    private String victoria;
+    
     public String getNombre() {
         return nombre;
     }
@@ -45,8 +48,28 @@ public class Gladiador {
             
         }
     }
+    
+    public String getHistoria() {
+        return historia;
+    }
 
-    String setNombre() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void setHistoria(String historia) {
+        this.historia = historia;
+    }
+    
+    public String getVictoria() {
+        return victoria;
+    }
+
+    public void setVictoria(String victoria) {
+        this.victoria = victoria;
+    }
+    
+    public String getDerrota() {
+        return derrota;
+    }
+
+    public void setDerrota(String derrota) {
+        this.derrota = derrota;
     }
 }
