@@ -1,15 +1,20 @@
 
 import java.util.Random;
+import java.util.*;
 
 public class Gladiador {
-    private String nombre;
-    private String estado = "En guardia";
-    private int energia = 100;
-    private int fuerza;
-    private String historia;
-    private String derrota;
-    private String victoria;
-    
+    public static Scanner s = new Scanner(System.in);
+    public String nombre;
+    public String estado = "En guardia";
+    public int energia = 100;
+    public int fuerza;
+    public String historia;
+    public String derrota = "Shaaaaaaaaaa... Te agilasteeeeee...";
+    public String victoria = "Soy el más la zorra de este planeta!!!";
+    public int bono_Energia=0;
+    public int bono_dano=0;
+    public int danototal=0;
+
     public String getNombre() {
         return nombre;
     }
@@ -33,22 +38,22 @@ public class Gladiador {
     public void setFuerza(int fuerza) {
         this.fuerza = fuerza;
     }
-    
-    public int atacar(){
+
+    public int atacar() {
         Random rnd = new Random();
         int danototal = 0;
         danototal = this.fuerza = rnd.nextInt(50);
         return danototal;
     }
 
-    public void recibirDano(int danorecibido){
+    public void recibirDano(int danorecibido) {
         this.energia = this.energia - danorecibido;
-        if(this.energia <= 0){
+        if (this.energia <= 0) {
             this.estado = "Derrotado";
-            
+
         }
     }
-    
+
     public String getHistoria() {
         return historia;
     }
@@ -56,7 +61,7 @@ public class Gladiador {
     public void setHistoria(String historia) {
         this.historia = historia;
     }
-    
+
     public String getVictoria() {
         return victoria;
     }
@@ -64,12 +69,54 @@ public class Gladiador {
     public void setVictoria(String victoria) {
         this.victoria = victoria;
     }
-    
+
     public String getDerrota() {
         return derrota;
     }
 
     public void setDerrota(String derrota) {
         this.derrota = derrota;
+    }
+
+    public int aumentaVida() {
+        do {
+            System.out.print("El Enano usa Aumento de Energía y suma entre 50 y 100, eliga el aumento: ");
+            bono_Energia = Integer.parseInt(s.nextLine());
+        } while (bono_Energia > 100 || bono_Energia < 50);
+        energia = bono_Energia + energia;
+        System.out.println("");
+        return energia;
+
+    }
+
+    public int quitaVida() {
+        //System.out.println("");
+        System.out.println("Elfo aplica un hechizo y reduce el 10% de la energía del Rival!!");
+        System.out.println("");
+        energia = energia * 90 / 100;
+        return energia;
+    }
+
+    public int superBono() {
+        do {
+            System.out.print("Hombre usa SuperBono!!!, elija el plus de daño entre 5 y 15: ");
+            bono_dano = Integer.parseInt(s.nextLine());
+        } while (bono_dano > 15 || bono_dano < 5);
+        //danototal = bono_dano + danototal;
+        System.out.println("");
+        return bono_dano + atacar();
+
+    }
+    
+    public String excepciones(String ewxcepciones){
+        try {
+            int opcion = Integer.parseInt(s.nextLine());
+                } catch (InputMismatchException ex) {
+                    s.nextLine();
+                    //System.out.print("Valor ingresado incorrecto, inténtelo una vez más\n");
+                } catch (NumberFormatException ex) {
+                    System.out.println("No ingresó un número \n");
+                }
+        return ewxcepciones;
     }
 }
