@@ -6,15 +6,30 @@ public class Gladiador {
     public static Scanner s = new Scanner(System.in);
     public String nombre;
     public String estado = "En guardia";
-    public int energia = 100;
-    public int fuerza;
     public String historia;
-    public String derrota = "Shaaaaaaaaaa... Te agilasteeeeee...";
-    public String victoria = "Soy el más la zorra de este planeta!!!";
+    public String derrota = "No puede estar pasando!!! NOOOOOOOOOOOOOOOOO...!!! ";
+    public String victoria = "Te hace falta más entrenamiento... Y valor para derrotarme!!!";
     public int bono_Energia=0;
     public int bono_dano=0;
     public int danototal=0;
+    public int energia = 100;
+    public int fuerza;
+    public int vida;
+    
+    
+    public int getVida() {
+        return vida;
+    }
 
+    public void setVida(int contador) {
+        this.vida = contador;
+        if (this.vida >= 9) {
+            this.estado = "Derrotado";
+
+        }
+    }
+    
+        
     public String getNombre() {
         return nombre;
     }
@@ -46,7 +61,7 @@ public class Gladiador {
         return danototal;
     }
 
-    public void recibirDano(int danorecibido) {
+    public void Dano(int danorecibido) {
         this.energia = this.energia - danorecibido;
         if (this.energia <= 0) {
             this.estado = "Derrotado";

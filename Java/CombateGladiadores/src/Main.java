@@ -14,12 +14,12 @@ public class Main {
         int opcion = 0;
         int op = 0;
         int op2 = 0;
+        int contador = 0;
         String luchador1 = "";
         String luchador2 = "";
-        String hist_hm = "Soy entero vioh y voh entero loggi, te tiraste!!!";
-        String hist_ef = "Chispea antes que te raje el paño, ya saí ya!!!";
-        String hist_en = "Y a voh quien te movio la jaula pajarraco???";
-        
+        String hist_hm = "Elfos, Enanos, Humanos... Todos morirán!!!";
+        String hist_ef = "Siglos de sangrientas batallas... No puedo perder!!!";
+        String hist_en = "Sólo necesito un escudo y mi HACHA!!!";
 
         do {
             System.out.println("** Luchador Raza: Elfo **");
@@ -108,7 +108,7 @@ public class Main {
         g1.setHistoria(hist_ef);
         g2.setHistoria(hist_en);
         g3.setHistoria(hist_hm);
-        
+
         if (op == 1) {
             System.out.println("Seleccionó al luchador: " + g1.getNombre());
             luchador1 = g1.getNombre();
@@ -151,7 +151,7 @@ public class Main {
                 System.out.println("==========================");
                 System.out.println("");
                 g3.quitaVida();
-                dano_reforzado=g3.superBono();
+                dano_reforzado = g3.superBono();
                 luchador2 = g3.getNombre();
             }
 
@@ -193,7 +193,7 @@ public class Main {
                 System.out.println("¡¡¡FASE DE BONIFICACION!!!");
                 System.out.println("==========================");
                 g2.aumentaVida();
-                dano_reforzado=g3.superBono();
+                dano_reforzado = g3.superBono();
                 luchador2 = g3.getNombre();
             }
         } else {
@@ -221,7 +221,7 @@ public class Main {
                 System.out.println("==========================");
                 System.out.println("");
                 g3.quitaVida();
-                dano_reforzado=g3.superBono();
+                dano_reforzado = g3.superBono();
                 luchador2 = g1.getNombre();
 
             } else {
@@ -235,7 +235,7 @@ public class Main {
                 System.out.println("==========================");
                 System.out.println("");
                 g2.aumentaVida();
-                dano_reforzado=g3.superBono();
+                dano_reforzado = g3.superBono();
                 luchador2 = g2.getNombre();
             }
         }
@@ -254,42 +254,53 @@ public class Main {
                 } catch (NumberFormatException ex) {
                     System.out.println("No ingresó un número \n");
                 }
-                
+
                 switch (opcion) {
                     case 1:
                         danoataque = g1.atacar();
                         System.out.println(g1.getNombre() + " atacó a " + g2.getNombre() + " y el daño fue de " + danoataque + " puntos!!!");
-                        g2.recibirDano(danoataque);
+                        g2.Dano(danoataque);
+                        g2.setVida(contador);
+                        contador++;
                         System.out.println("\n");
+                        //System.out.println("Contador: "+contador);
                         if (g2.getEstado().equals("Derrotado")) {
-                            System.out.println(g2.getNombre() + " ha sido derrotado!");
-                            System.out.println(g2.getDerrota()+"\n");
-                            System.out.println(g1.getNombre() + " es el ganador!");
-                            System.out.println(g1.getVictoria()+"\n");
+                            if (g2.getEnergia() < g1.getEnergia()) {
+                                System.out.println(g2.getNombre() + " ha sido derrotado!");
+                                System.out.println(g2.getDerrota() + "\n");
+                                System.out.println(g1.getNombre() + " es el ganador!");
+                                System.out.println(g1.getVictoria() + "\n");
+                            }
+
                         }
                         break;
                     case 2:
                         danoataque = g2.atacar();
                         System.out.println(g2.getNombre() + " atacó a " + g1.getNombre() + " y el daño fue de " + danoataque + "!");
-                        g1.recibirDano(danoataque);
+                        g1.Dano(danoataque);
+                        g1.setVida(contador);
+                        contador++;
                         System.out.println("\n");
                         if (g1.getEstado().equals("Derrotado")) {
-                            System.out.println(g1.getNombre() + " ha sido derrotado!");
-                            System.out.println(g1.getHistoria()+"\n");
-                            System.out.println(g2.getNombre() + " es el ganador!");
-                            System.out.println(g2.getVictoria()+"\n");
+                            if (g1.getEnergia() < g2.getEnergia()) {
+                                System.out.println(g1.getNombre() + " ha sido derrotado!");
+                                System.out.println(g1.getHistoria() + "\n");
+                                System.out.println(g2.getNombre() + " es el ganador!");
+                                System.out.println(g2.getVictoria() + "\n");
+                            }
                         }
                         break;
                     default:
                         System.out.println("Ingrese opción 1 o 2 \n");
                         System.out.println();
-                                   
+
                 }
                 System.out.println("\n");
                 System.out.println("La energía de " + g1.getNombre() + " es " + g1.getEnergia());
                 System.out.println("La energía de " + g2.getNombre() + " es " + g2.getEnergia());
                 System.out.println("\n");
             } while (g1.getEstado().equals("En guardia") && g2.getEstado().equals("En guardia"));
+
         } else if (op == 1 && op2 == 2 || op == 3 && op2 == 1) {
             do {
                 //System.out.print("Ingrese el número del luchador que atacará. \n\n1) " + luchador1 + "\n2) " + luchador2 + "\nAtaca: ");
@@ -306,26 +317,34 @@ public class Main {
                     case 1:
                         danoataque = g1.atacar();
                         System.out.println(g1.getNombre() + " atacó a " + g3.getNombre() + " y el daño fue de " + danoataque + " puntos!!!");
-                        g3.recibirDano(danoataque);
+                        g3.Dano(danoataque);
+                        g2.setVida(contador);
+                        contador++;
                         System.out.println("\n");
                         if (g3.getEstado().equals("Derrotado")) {
-                            System.out.println(g3.getNombre() + " ha sido derrotado!");
-                            System.out.println(g3.getDerrota()+"\n");
-                            System.out.println("DEBE SOLICITAR ACTUALIZAR EL ARMA\n");
-                            System.out.println(g1.getNombre() + " es el ganador!");
-                            System.out.println(g1.getVictoria()+"\n");
+                            if (g3.getEnergia() < g1.getEnergia()) {
+                                System.out.println(g3.getNombre() + " ha sido derrotado!");
+                                System.out.println(g3.getDerrota() + "\n");
+                                System.out.println("DEBE SOLICITAR ACTUALIZAR EL ARMA\n");
+                                System.out.println(g1.getNombre() + " es el ganador!");
+                                System.out.println(g1.getVictoria() + "\n");
+                            }
                         }
                         break;
                     case 2:
                         danoataque = g3.atacar();
                         System.out.println(g3.getNombre() + " atacó a " + g1.getNombre() + " y el daño fue de " + danoataque + "!");
-                        g1.recibirDano(danoataque);
+                        g1.Dano(danoataque);
+                        g2.setVida(contador);
+                        contador++;
                         System.out.println("\n");
                         if (g1.getEstado().equals("Derrotado")) {
-                            System.out.println(g1.getNombre() + " ha sido derrotado!");
-                            System.out.println(g1.getHistoria()+"\n");
-                            System.out.println(g3.getNombre() + " es el ganador!");
-                            System.out.println(g3.getVictoria()+"\n");
+                            if (g1.getEnergia() < g3.getEnergia()) {
+                                System.out.println(g1.getNombre() + " ha sido derrotado!");
+                                System.out.println(g1.getHistoria() + "\n");
+                                System.out.println(g3.getNombre() + " es el ganador!");
+                                System.out.println(g3.getVictoria() + "\n");
+                            }
                         }
                         break;
                 }
@@ -350,26 +369,34 @@ public class Main {
                     case 1:
                         danoataque = g2.atacar();
                         System.out.println(g2.getNombre() + " atacó a " + g3.getNombre() + " y el daño fue de " + danoataque + " puntos!!!");
-                        g3.recibirDano(danoataque);
+                        g3.Dano(danoataque);
+                        g2.setVida(contador);
+                        contador++;
                         System.out.println("\n");
                         if (g3.getEstado().equals("Derrotado")) {
-                            System.out.println(g3.getNombre() + " ha sido derrotado!");
-                            System.out.println(g3.getDerrota()+"\n");
-                            System.out.println("DEBE SOLICITAR ACTUALIZAR EL ARMA\n");
-                            System.out.println(g2.getNombre() + " es el ganador!");
-                            System.out.println(g2.getVictoria()+"\n");
+                            if (g3.getEnergia() < g2.getEnergia()) {
+                                System.out.println(g3.getNombre() + " ha sido derrotado!");
+                                System.out.println(g3.getDerrota() + "\n");
+                                System.out.println("DEBE SOLICITAR ACTUALIZAR EL ARMA\n");
+                                System.out.println(g2.getNombre() + " es el ganador!");
+                                System.out.println(g2.getVictoria() + "\n");
+                            }
                         }
                         break;
                     case 2:
                         danoataque = g3.atacar();
                         System.out.println(g3.getNombre() + " atacó a " + g2.getNombre() + " y el daño fue de " + danoataque + "!");
-                        g2.recibirDano(danoataque);
+                        g2.Dano(danoataque);
+                        g2.setVida(contador);
+                        contador++;
                         System.out.println("\n");
                         if (g2.getEstado().equals("Derrotado")) {
-                            System.out.println(g2.getNombre() + " ha sido derrotado!");
-                            System.out.println(g2.getDerrota()+"\n");
-                            System.out.println(g3.getNombre() + " es el ganador!");
-                            System.out.println(g3.getVictoria()+"\n");
+                            if (g2.getEnergia() < g3.getEnergia()) {
+                                System.out.println(g2.getNombre() + " ha sido derrotado!");
+                                System.out.println(g2.getDerrota() + "\n");
+                                System.out.println(g3.getNombre() + " es el ganador!");
+                                System.out.println(g3.getVictoria() + "\n");
+                            }
                         }
                         break;
                 }
@@ -379,7 +406,6 @@ public class Main {
                 System.out.println("\n");
             } while (g2.getEstado().equals("En guardia") && g3.getEstado().equals("En guardia"));
         }
-
         System.out.println("Fin del combate");
     }
 
