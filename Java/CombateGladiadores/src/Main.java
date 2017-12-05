@@ -19,37 +19,69 @@ public class Main {
         String hist_ef = "Chispea antes que te raje el paño, ya saí ya!!!";
         String hist_en = "Y a voh quien te movio la jaula pajarraco???";
 
-        System.out.println("** Luchador Raza: Elfo **");
-        System.out.print("Ingrese el nombre del luchador: ");
-        nombre = s.nextLine();
         do {
-            System.out.print("Ingrese la fuerza de " + nombre + " (1-5): ");
-            fuerza = Integer.parseInt(s.nextLine());
-            System.out.println("\n");
+            System.out.println("** Luchador Raza: Elfo **");
+            System.out.print("Ingrese el nombre del luchador: ");
+            nombre = s.nextLine();
+            if (nombre.isEmpty()) {
+                System.out.println("Nombre no Valido");
+            }
+        } while (nombre.isEmpty());
+
+        do {
+            try {
+                System.out.print("Ingrese la fuerza de " + nombre + " (1-5): ");
+                fuerza = Integer.parseInt(s.nextLine());
+                System.out.println("\n");
+            } catch (Exception e) {
+                System.out.println("ingrese un numero entre 1 y 5");
+            }
+
         } while (fuerza < 1 || fuerza > 5);
         Gladiador g1 = new Gladiador();
         g1.setNombre(nombre);
         g1.setFuerza(fuerza);
 
-        System.out.println("** Luchador Raza: Enano **");
-        System.out.print("Ingrese el nombre del luchador: ");
-        nombre = s.nextLine();
         do {
-            System.out.print("Ingrese la fuerza de " + nombre + " (1-5): ");
-            fuerza = Integer.parseInt(s.nextLine());
-            System.out.println("\n");
+            System.out.println("** Luchador Raza: Enano **");
+            System.out.print("Ingrese el nombre del luchador: ");
+            nombre = s.nextLine();
+            if (nombre.isEmpty()) {
+                System.out.println("Nombre no Valido");
+            }
+        } while (nombre.isEmpty());
+
+        do {
+            try {
+                System.out.print("Ingrese la fuerza de " + nombre + " (1-5): ");
+                fuerza = Integer.parseInt(s.nextLine());
+                System.out.println("\n");
+            } catch (Exception e) {
+                System.out.println("ingrese un numero entre 1 y 5");
+            }
+
         } while (fuerza < 1 || fuerza > 5);
         Gladiador g2 = new Gladiador();
         g2.setNombre(nombre);
         g2.setFuerza(fuerza);
 
-        System.out.println("** Luchador Raza: Hombre **");
-        System.out.print("Ingrese el nombre del luchador: ");
-        nombre = s.nextLine();
         do {
-            System.out.print("Ingrese la fuerza de " + nombre + " (1-5): ");
-            fuerza = Integer.parseInt(s.nextLine());
-            System.out.println("\n");
+            System.out.println("** Luchador Raza: Hombre **");
+            System.out.print("Ingrese el nombre del luchador: ");
+            nombre = s.nextLine();
+            if (nombre.isEmpty()) {
+                System.out.println("Nombre no Valido");
+            }
+        } while (nombre.isEmpty());
+
+        do {
+            try {
+                System.out.print("Ingrese la fuerza de " + nombre + " (1-5): ");
+                fuerza = Integer.parseInt(s.nextLine());
+                System.out.println("\n");
+            } catch (Exception e) {
+                System.out.println("ingrese un numero entre 1 y 5");
+            }
         } while (fuerza < 1 || fuerza > 5);
         Gladiador g3 = new Gladiador();
         g3.setNombre(nombre);
@@ -101,9 +133,12 @@ public class Main {
                 luchador2 = g2.getNombre();
 
             } else {
-                System.out.println("LUCHADORES!!!");
-                System.out.println(g1.getNombre() + "\n\t" + g1.getHistoria()
-                        + "\n\t VS \n" + g3.getNombre() + "\n\t" + g3.getHistoria() + "\n");;
+                System.out.println("LUCHADORES!!!\n");
+                System.out.println(g1.getNombre() + "\n\t" + g1.getHistoria() + "\n");
+                System.out.println("\t##########");
+                System.out.println("\t##  VS  ##");
+                System.out.println("\t##########");
+                System.out.println(g3.getNombre() + "\n\t" + g3.getHistoria() + "\n");
                 luchador2 = g3.getNombre();
             }
 
@@ -124,14 +159,20 @@ public class Main {
                 }
             }
             if (op2 == 1) {
-                System.out.println("LUCHADORES!!!");
-                System.out.println(g2.getNombre() + "\n\t" + g2.getHistoria()
-                        + "\n\t VS \n" + g1.getNombre() + "\n\t" + g1.getHistoria() + "\n");
+                System.out.println("LUCHADORES!!!\n");
+                System.out.println(g2.getNombre() + "\n\t" + g2.getHistoria() + "\n");
+                System.out.println("\t##########");
+                System.out.println("\t##  VS  ##");
+                System.out.println("\t##########");
+                System.out.println(g1.getNombre() + "\n\t" + g1.getHistoria() + "\n");
                 luchador2 = g1.getNombre();
             } else {
-                System.out.println("LUCHADORES!!!");
-                System.out.println(g2.getNombre() + "\n\t" + g2.getHistoria()
-                        + "\n\t VS \n" + g3.getNombre() + "\n\t" + g3.getHistoria() + "\n");
+                System.out.println("LUCHADORES!!!\n");
+                System.out.println(g2.getNombre() + "\n\t" + g2.getHistoria() + "\n");
+                System.out.println("\t##########");
+                System.out.println("\t##  VS  ##");
+                System.out.println("\t##########");
+                System.out.println(g3.getNombre() + "\n\t" + g3.getHistoria() + "\n");
                 luchador2 = g3.getNombre();
             }
         } else {
@@ -149,15 +190,21 @@ public class Main {
                 }
             }
             if (op2 == 1) {
-                System.out.println("LUCHADORES!!!");
-                System.out.println(g3.getNombre() + "\n\t" + g3.getHistoria()
-                        + "\n\t VS \n" + g1.getNombre() + "\n\t" + g1.getHistoria() + "\n");
+                System.out.println("LUCHADORES!!!\n");
+                System.out.println(g3.getNombre() + "\n\t" + g3.getHistoria() + "\n");
+                System.out.println("\t##########");
+                System.out.println("\t##  VS  ##");
+                System.out.println("\t##########");
+                System.out.println(g1.getNombre() + "\n\t" + g1.getHistoria() + "\n");
                 luchador2 = g1.getNombre();
 
             } else {
-                System.out.println("LUCHADORES!!!");
-                System.out.println(g3.getNombre() + "\n\t" + g3.getHistoria()
-                        + "\n\t VS \n" + g2.getNombre() + "\n\t" + g2.getHistoria() + "\n");
+                System.out.println("LUCHADORES!!!\n");
+                System.out.println(g3.getNombre() + "\n\t" + g3.getHistoria() + "\n");
+                System.out.println("\t##########");
+                System.out.println("\t##  VS  ##");
+                System.out.println("\t##########");
+                System.out.println(g2.getNombre() + "\n\t" + g2.getHistoria() + "\n");
                 luchador2 = g2.getNombre();
             }
         }
@@ -186,6 +233,10 @@ public class Main {
                             System.out.println(g1.getNombre() + " ha sido derroatado!");
                         }
                         break;
+                    default:
+                        System.out.println("Ingrese opción 1 o 2 \n");
+                        System.out.println();
+                                   
                 }
                 System.out.println("La energía de " + g1.getNombre() + " es " + g1.getEnergia());
                 System.out.println("La energía de " + g2.getNombre() + " es " + g2.getEnergia());
@@ -211,7 +262,7 @@ public class Main {
                         g1.recibirDano(danoataque);
                         System.out.println("\n");
                         if (g1.getEstado().equals("Derrotado")) {
-                            System.out.println(g1.getNombre() + " ha sido derroatado!");
+                            System.out.println(g1.getNombre() + " ha sido derrotado!");
                         }
                         break;
                 }
@@ -230,7 +281,7 @@ public class Main {
                         g3.recibirDano(danoataque);
                         System.out.println("\n");
                         if (g3.getEstado().equals("Derrotado")) {
-                            System.out.println(g3.getNombre() + " ha sido derroatado!");
+                            System.out.println(g3.getNombre() + " ha sido derrotado!");
                         }
                         break;
                     case 2:
@@ -239,7 +290,7 @@ public class Main {
                         g2.recibirDano(danoataque);
                         System.out.println("\n");
                         if (g2.getEstado().equals("Derrotado")) {
-                            System.out.println(g2.getNombre() + " ha sido derroatado!");
+                            System.out.println(g2.getNombre() + " ha sido derrotado!");
                         }
                         break;
                 }
