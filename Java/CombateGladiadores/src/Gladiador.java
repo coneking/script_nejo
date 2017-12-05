@@ -7,6 +7,8 @@ public class Gladiador {
     private int energia = 100;
     private int fuerza;
     private String historia;
+    private String derrota;
+    private String victoria;
     
     public String getNombre() {
         return nombre;
@@ -53,5 +55,21 @@ public class Gladiador {
 
     public void setHistoria(String historia) {
         this.historia = historia;
+    }
+    
+    public String getVictoria() {
+        return victoria;
+    }
+
+    public void setVictoria(String victoria) {
+        this.victoria = victoria;
+    }
+    
+    public String getDerrota() {
+        return derrota;
+    }
+
+    public void setDerrota(String derrota) {
+        this.derrota = derrota;
     }
 }
