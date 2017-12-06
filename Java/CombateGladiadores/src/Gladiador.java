@@ -12,7 +12,7 @@ public class Gladiador {
     public int bono_Energia=0;
     public int bono_dano=0;
     public int danototal=0;
-    public int energia = 100;
+    public int energia = 1000;
     public int fuerza;
     public int vida;
     

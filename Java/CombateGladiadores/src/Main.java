@@ -261,7 +261,7 @@ public class Main {
                         System.out.println(g1.getNombre() + " atacó a " + g2.getNombre() + " y el daño fue de " + danoataque + " puntos!!!");
                         g2.Dano(danoataque);
                         g2.setVida(contador);
-                        contador++;
+                        //contador++;
                         System.out.println("\n");
                         //System.out.println("Contador: "+contador);
                         if (g2.getEstado().equals("Derrotado")) {
@@ -271,7 +271,6 @@ public class Main {
                                 System.out.println(g1.getNombre() + " es el ganador!");
                                 System.out.println(g1.getVictoria() + "\n");
                             }
-
                         }
                         break;
                     case 2:
@@ -279,7 +278,7 @@ public class Main {
                         System.out.println(g2.getNombre() + " atacó a " + g1.getNombre() + " y el daño fue de " + danoataque + "!");
                         g1.Dano(danoataque);
                         g1.setVida(contador);
-                        contador++;
+                        //contador++;
                         System.out.println("\n");
                         if (g1.getEstado().equals("Derrotado")) {
                             if (g1.getEnergia() < g2.getEnergia()) {
@@ -295,6 +294,7 @@ public class Main {
                         System.out.println();
 
                 }
+                contador++;
                 System.out.println("\n");
                 System.out.println("La energía de " + g1.getNombre() + " es " + g1.getEnergia());
                 System.out.println("La energía de " + g2.getNombre() + " es " + g2.getEnergia());
@@ -318,7 +318,7 @@ public class Main {
                         danoataque = g1.atacar();
                         System.out.println(g1.getNombre() + " atacó a " + g3.getNombre() + " y el daño fue de " + danoataque + " puntos!!!");
                         g3.Dano(danoataque);
-                        g2.setVida(contador);
+                        g3.setVida(contador);
                         contador++;
                         System.out.println("\n");
                         if (g3.getEstado().equals("Derrotado")) {
@@ -335,7 +335,7 @@ public class Main {
                         danoataque = g3.atacar();
                         System.out.println(g3.getNombre() + " atacó a " + g1.getNombre() + " y el daño fue de " + danoataque + "!");
                         g1.Dano(danoataque);
-                        g2.setVida(contador);
+                        g1.setVida(contador);
                         contador++;
                         System.out.println("\n");
                         if (g1.getEstado().equals("Derrotado")) {
@@ -347,13 +347,16 @@ public class Main {
                             }
                         }
                         break;
+                    default:
+                        System.out.println("Ingrese opción 1 o 2 \n");
+                        System.out.println();
                 }
                 System.out.println("\n");
                 System.out.println("La energía de " + g1.getNombre() + " es " + g1.getEnergia());
                 System.out.println("La energía de " + g3.getNombre() + " es " + g3.getEnergia());
                 System.out.println("\n");
             } while (g1.getEstado().equals("En guardia") && g3.getEstado().equals("En guardia"));
-        } else {
+        } else if (op == 2 && op2 == 2 || op == 3 && op2 == 2){
             do {
                 //System.out.print("Ingrese el número del luchador que atacará. \n\n1) " + luchador1 + "\n2) " + luchador2 + "\nAtaca: ");
                 System.out.print("Ingrese el número del luchador que atacará. \n\n1) " + g2.getNombre() + "\n2) " + g3.getNombre() + "\nAtaca: ");
@@ -370,7 +373,7 @@ public class Main {
                         danoataque = g2.atacar();
                         System.out.println(g2.getNombre() + " atacó a " + g3.getNombre() + " y el daño fue de " + danoataque + " puntos!!!");
                         g3.Dano(danoataque);
-                        g2.setVida(contador);
+                        g3.setVida(contador);
                         contador++;
                         System.out.println("\n");
                         if (g3.getEstado().equals("Derrotado")) {
@@ -399,6 +402,9 @@ public class Main {
                             }
                         }
                         break;
+                    default:
+                        System.out.println("Ingrese opción 1 o 2 \n");
+                        System.out.println();
                 }
                 System.out.println("\n");
                 System.out.println("La energía de " + g2.getNombre() + " es " + g2.getEnergia());
