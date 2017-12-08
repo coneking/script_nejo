@@ -236,7 +236,7 @@ public class Main {
                     default:
                         System.out.println("Ingrese opción 1 o 2 \n");
                         System.out.println();
-                                   
+
                 }
                 System.out.println("La energía de " + g1.getNombre() + " es " + g1.getEnergia());
                 System.out.println("La energía de " + g2.getNombre() + " es " + g2.getEnergia());
