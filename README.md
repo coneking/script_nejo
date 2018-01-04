@@ -1,1 +1,1 @@
-# script_nejo
+# Scripts bash, python
