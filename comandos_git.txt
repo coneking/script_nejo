@@ -303,3 +303,4 @@ Iniciar el directorio como repositorio:
 	git config core.sharedRepository true
 
 (Con esto se puede utilizar un servidor Linux como repositorio central)
+
